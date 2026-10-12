@@ -1,0 +1,311 @@
+{
+  "version": 2,
+  "mode": "paper",
+  "created_at": "2026-10-11T23:00:00Z",
+  "updated_at": "2026-10-11T23:45:00Z",
+  "universe": {
+    "symbols": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "DOGE",
+      "ONDO",
+      "USDC",
+      "HYPE",
+      "PEPE",
+      "ADA",
+      "ENA",
+      "UNI",
+      "AAVE",
+      "AVAX",
+      "SUI",
+      "LINK",
+      "XLM",
+      "HBAR",
+      "LTC",
+      "BCH",
+      "ARB",
+      "LIT",
+      "WLFI",
+      "DOT",
+      "LDO",
+      "OP",
+      "AERO",
+      "WIF",
+      "TRUMP",
+      "PENGU",
+      "SHIB",
+      "COMP",
+      "CRV",
+      "XPL",
+      "PNUT",
+      "BONK",
+      "SEI",
+      "XTZ",
+      "SYRUP",
+      "FLOKI",
+      "MEW",
+      "POPCAT",
+      "ASTER",
+      "ZORA",
+      "AVNT",
+      "BNB",
+      "MNT",
+      "MOODENG",
+      "XCN"
+    ],
+    "description": "All Robinhood-tradable crypto pairs"
+  },
+  "account": {
+    "virtual_cash_usd": 990000,
+    "virtual_starting_capital_usd": 1000000
+  },
+  "realized_pnl_usd": 0,
+  "rule_sets": [
+    {
+      "id": "default-rsi-dip",
+      "label": "Default: RSI oversold dip-buy, RSI-recovery exit",
+      "active_window": "always",
+      "entry": {
+        "type": "rsi_below",
+        "rsi_period": 14,
+        "rsi_interval": "1h",
+        "threshold": 20,
+        "position_size_pct_of_portfolio": 1
+      },
+      "exit": {
+        "type": "rsi_at_or_above",
+        "rsi_period": 14,
+        "rsi_interval": "1h",
+        "threshold": 30,
+        "action": "sell_all"
+      }
+    }
+  ],
+  "positions": {
+    "MOODENG": {
+      "quantity": 244379.27663734116,
+      "avg_cost_basis": 0.04092,
+      "total_cost_usd": 10000,
+      "last_mark_price": 0.04092,
+      "opened_by_rule": "default-rsi-dip",
+      "opened_at": "2026-10-12T13:40:06Z",
+      "tranches": 1
+    }
+  },
+  "watch_state": {
+    "BTC": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ETH": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "SOL": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "XRP": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "DOGE": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ONDO": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "USDC": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "HYPE": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "PEPE": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ADA": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ENA": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "UNI": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "AAVE": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "AVAX": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "SUI": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "LINK": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "XLM": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "HBAR": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "LTC": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "BCH": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ARB": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "LIT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "WLFI": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "DOT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "LDO": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "OP": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "AERO": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "WIF": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "TRUMP": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "PENGU": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "SHIB": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "COMP": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "CRV": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "XPL": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "PNUT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "BONK": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "SEI": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "XTZ": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "SYRUP": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "FLOKI": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "MEW": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "POPCAT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ASTER": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "ZORA": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "AVNT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "BNB": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "MNT": {
+      "armed": true,
+      "has_open_position": false
+    },
+    "MOODENG": {
+      "armed": false,
+      "has_open_position": true
+    },
+    "XCN": {
+      "armed": true,
+      "has_open_position": false
+    }
+  },
+  "trade_log": [
+    {
+      "timestamp": "2026-10-12T13:40:06Z",
+      "symbol": "MOODENG",
+      "side": "buy",
+      "rule_id": "default-rsi-dip",
+      "rsi_at_trigger": 11.48,
+      "price": 0.04092,
+      "quantity": 244379.27663734116,
+      "notional_usd": 10000,
+      "mode": "paper"
+    }
+  ],
+  "closed_trades": [],
+  "last_run_at": "2026-10-12T16:39:27Z",
+  "run_count": 17
+}

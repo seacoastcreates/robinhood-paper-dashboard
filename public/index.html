@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Paper Trader</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Crypto Paper Trader</h1>
+      <p class="sub" id="subtitle">Loading…</p>
+    </div>
+    <div class="top-right">
+      <span class="badge" id="mode-badge">PAPER</span>
+      <button class="btn" id="refresh" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="error" class="error" hidden></div>
+
+    <section class="kpis" id="kpis" aria-label="Portfolio summary"></section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Equity</h2>
+        <div class="seg" role="tablist" aria-label="Equity view">
+          <button type="button" class="seg-btn is-on" data-view="chart">Chart</button>
+          <button type="button" class="seg-btn" data-view="table">Table</button>
+        </div>
+      </div>
+      <div id="equity-chart" class="chart"></div>
+      <div id="equity-table" class="table-wrap" hidden></div>
+    </section>
+
+    <div class="grid-2">
+      <section class="card">
+        <h2>Open positions</h2>
+        <div id="positions" class="table-wrap"></div>
+      </section>
+      <section class="card">
+        <h2>Rules</h2>
+        <div id="rules"></div>
+      </section>
+    </div>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Watchlist</h2>
+        <p class="hint" id="watch-hint"></p>
+      </div>
+      <div id="watchlist" class="watch"></div>
+    </section>
+
+    <section class="card">
+      <h2>Trade log</h2>
+      <div id="trades" class="table-wrap"></div>
+    </section>
+
+    <section class="card">
+      <h2>Closed trades</h2>
+      <div id="closed" class="table-wrap"></div>
+    </section>
+  </main>
+
+  <footer class="foot">Paper trading only. No real orders are placed. Data updates hourly at :37.</footer>
+
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
