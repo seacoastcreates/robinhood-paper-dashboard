@@ -2,7 +2,7 @@
   "version": 2,
   "mode": "paper",
   "created_at": "2026-10-11T23:00:00Z",
-  "updated_at": "2026-10-11T23:45:00Z",
+  "updated_at": "2026-10-12T17:26:33Z",
   "universe": {
     "symbols": [
       "BTC",
@@ -58,7 +58,7 @@
     "description": "All Robinhood-tradable crypto pairs"
   },
   "account": {
-    "virtual_cash_usd": 990000,
+    "virtual_cash_usd": 1000000,
     "virtual_starting_capital_usd": 1000000
   },
   "realized_pnl_usd": 0,
@@ -83,17 +83,7 @@
       }
     }
   ],
-  "positions": {
-    "MOODENG": {
-      "quantity": 244379.27663734116,
-      "avg_cost_basis": 0.04092,
-      "total_cost_usd": 10000,
-      "last_mark_price": 0.04092,
-      "opened_by_rule": "default-rsi-dip",
-      "opened_at": "2026-10-12T13:40:06Z",
-      "tranches": 1
-    }
-  },
+  "positions": {},
   "watch_state": {
     "BTC": {
       "armed": true,
@@ -284,8 +274,8 @@
       "has_open_position": false
     },
     "MOODENG": {
-      "armed": false,
-      "has_open_position": true
+      "armed": true,
+      "has_open_position": false
     },
     "XCN": {
       "armed": true,
@@ -303,9 +293,34 @@
       "quantity": 244379.27663734116,
       "notional_usd": 10000,
       "mode": "paper"
+    },
+    {
+      "timestamp": "2026-10-12T17:26:33Z",
+      "symbol": "MOODENG",
+      "side": "sell",
+      "rule_id": "default-rsi-dip",
+      "rsi_at_trigger": 32.17,
+      "price": 0.04092,
+      "quantity": 244379.27663734116,
+      "notional_usd": 10000,
+      "realized_pnl_usd": 0,
+      "mode": "paper"
     }
   ],
-  "closed_trades": [],
-  "last_run_at": "2026-10-12T16:39:27Z",
-  "run_count": 17
+  "closed_trades": [
+    {
+      "symbol": "MOODENG",
+      "rule_id": "default-rsi-dip",
+      "opened_at": "2026-10-12T13:40:06Z",
+      "closed_at": "2026-10-12T17:26:33Z",
+      "avg_cost_basis": 0.04092,
+      "exit_price": 0.04092,
+      "quantity": 244379.27663734116,
+      "cost_usd": 10000,
+      "proceeds_usd": 10000,
+      "realized_pnl_usd": 0
+    }
+  ],
+  "last_run_at": "2026-10-12T17:26:33Z",
+  "run_count": 18
 }

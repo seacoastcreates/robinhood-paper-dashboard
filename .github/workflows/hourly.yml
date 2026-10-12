@@ -1,0 +1,41 @@
+name: Hourly paper-trading run
+
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hourly-run
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scan and apply rules
+        run: python3 scripts/run_hourly.py
+
+      - name: Commit data
+        run: |
+          git config user.name "paper-trader-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          equity=$(python3 -c "import json; print(f\"{json.load(open('data/history.json'))[-1]['equity']:,.2f}\")")
+          git commit -m "data: hourly run, equity \$${equity}"
+          git pull --rebase origin main
+          git push

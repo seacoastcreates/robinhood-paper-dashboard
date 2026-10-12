@@ -1,12 +1,13 @@
 # Crypto Paper Trader dashboard
 
-A read-only dashboard for the hourly Robinhood crypto paper-trading bot. The bot itself
-runs as a scheduled task in the Robinhood project on claude.ai.
+An hourly crypto paper-trading bot and its dashboard. Paper only: nothing here has
+brokerage credentials or places orders.
 
 ```
-claude.ai scheduled task (hourly at :37)
-  -> paper_engine.py updates state
-  -> scripts/push_to_github.py commits data/*.json to this repo
+GitHub Actions (.github/workflows/hourly.yml, hourly at :37)
+  -> scripts/run_hourly.py pulls 1h candles from Coinbase (Kraken fallback, no keys),
+     computes RSI(14), applies the rules in data/state.json
+  -> commits data/*.json with the built-in GITHUB_TOKEN
 Netlify site
   -> public/ (static page) + netlify/functions/state.mjs
   -> the function reads data/*.json from GitHub on each request (60s cache)
@@ -19,9 +20,9 @@ Commits that only change `data/` don't trigger a Netlify rebuild (see `ignore` i
 
 | File | Written by | Contents |
 |---|---|---|
-| `data/state.json` | hourly task | the engine's state: cash, positions, rules, trade log, closed trades |
-| `data/history.json` | hourly task | one equity snapshot per run, for the chart |
-| `data/last_scan.json` | hourly task | latest RSI and price for every coin on the watchlist |
+| `data/state.json` | hourly run | the engine's state: cash, positions, rules, trade log, closed trades |
+| `data/history.json` | hourly run | one equity snapshot per run, for the chart |
+| `data/last_scan.json` | hourly run | latest RSI and price for every coin on the watchlist |
 
 ## Netlify environment variables
 
@@ -35,3 +36,13 @@ Commits that only change `data/` don't trigger a Netlify rebuild (see `ignore` i
 
 `npx netlify-cli dev` serves the site. With no `GITHUB_TOKEN` set, the function reads
 `data/` from disk.
+
+## Changing the rules
+
+Edit `rule_sets` in `data/state.json` (entry/exit thresholds, position size) or
+`universe.symbols`, commit, and the next run uses them. Run it on demand from the
+Actions tab ("Hourly paper-trading run" -> Run workflow), or locally with
+`python3 scripts/run_hourly.py --dry-run` to see the scan without writing anything.
+
+History: runs 1-18 (2026-10-11 to 2026-10-12) ran as a claude.ai scheduled task using
+Robinhood's scanner; later runs use Coinbase/Kraken prices.
