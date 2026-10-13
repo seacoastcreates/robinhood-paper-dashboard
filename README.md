@@ -1,48 +1,32 @@
-# Crypto Paper Trader dashboard
+# Crypto Paper Trader
 
-An hourly crypto paper-trading bot and its dashboard. Paper only: nothing here has
-brokerage credentials or places orders.
+An hourly crypto paper-trading bot and its dashboard, both on Netlify. Paper only:
+nothing here has brokerage credentials or places orders.
 
 ```
-GitHub Actions (.github/workflows/hourly.yml, hourly at :37)
-  -> scripts/run_hourly.py pulls 1h candles from Coinbase (Kraken fallback, no keys),
-     computes RSI(14), applies the rules in data/state.json
-  -> commits data/*.json with the built-in GITHUB_TOKEN
-Netlify site
-  -> public/ (static page) + netlify/functions/state.mjs
-  -> the function reads data/*.json from GitHub on each request (60s cache)
+netlify/functions/hourly-run.mts   scheduled, every hour at :37
+  -> netlify/lib/engine.mts pulls 1h candles from Coinbase (Kraken fallback, no keys),
+     computes RSI(14), applies the rules in the stored state
+  -> saves state / history / last_scan to the "paper-trader" Netlify Blobs store
+netlify/functions/state.mts        GET /api/state, read by the page in public/
 ```
 
-Commits that only change `data/` don't trigger a Netlify rebuild (see `ignore` in
-`netlify.toml`). The page picks up new data on its own.
+No tokens or environment variables are needed.
 
-## Data files
+## Rules
 
-| File | Written by | Contents |
-|---|---|---|
-| `data/state.json` | hourly run | the engine's state: cash, positions, rules, trade log, closed trades |
-| `data/history.json` | hourly run | one equity snapshot per run, for the chart |
-| `data/last_scan.json` | hourly run | latest RSI and price for every coin on the watchlist |
+Buy 1% of equity when a coin's 1h RSI(14) drops below 20; sell the whole position
+when RSI gets back to 30 or above. Watchlist: all 49 Robinhood crypto pairs.
 
-## Netlify environment variables
+The live rules are in the stored state. `data/*.json` is only the seed used the first
+time the store is empty (runs 1-19, before the bot moved to Netlify). To change rules
+after that, ask for a small "update rules" change rather than editing `data/`.
 
-| Name | Value |
-|---|---|
-| `GITHUB_REPO` | `seacoastcreates/robinhood-paper-dashboard` |
-| `GITHUB_TOKEN` | fine-grained token, this repo only, **Contents: read-only** |
-| `GITHUB_BRANCH` | optional, defaults to `main` |
+## Running it
 
-## Local preview
+- **Now:** Netlify UI -> Logs & metrics -> Functions -> `hourly-run` -> Run now.
+- **Locally, without saving anything:** `npm install && npm run dry-run`.
+- **Raw data:** `/api/state` returns everything as JSON.
 
-`npx netlify-cli dev` serves the site. With no `GITHUB_TOKEN` set, the function reads
-`data/` from disk.
-
-## Changing the rules
-
-Edit `rule_sets` in `data/state.json` (entry/exit thresholds, position size) or
-`universe.symbols`, commit, and the next run uses them. Run it on demand from the
-Actions tab ("Hourly paper-trading run" -> Run workflow), or locally with
-`python3 scripts/run_hourly.py --dry-run` to see the scan without writing anything.
-
-History: runs 1-18 (2026-10-11 to 2026-10-12) ran as a claude.ai scheduled task using
-Robinhood's scanner; later runs use Coinbase/Kraken prices.
+History: runs 1-18 ran as a claude.ai scheduled task using Robinhood's scanner; run 19
+ran in GitHub Actions; later runs use Coinbase/Kraken prices on Netlify.
